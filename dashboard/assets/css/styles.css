@@ -1,0 +1,11 @@
+.disp{
+    display: flex;
+    flex-direction: 1;
+    justify-content: space-around;
+}
+
+.member-search{
+    margin-bottom: 20px;
+    
+    
+}

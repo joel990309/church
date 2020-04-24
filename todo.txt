@@ -1,0 +1,8 @@
+17/4/2020
+TODO LIST
+
+- Finnish All the Users input
+* Add User
+* View Users
+* Edit User
+* Delete User
