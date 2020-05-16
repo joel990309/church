@@ -30,8 +30,8 @@ if(isset($_POST['login'])) {
         $db_user_password = $row['user_password'];
         $db_user_firstname = $row['user_firstname'];
         $db_user_lastname = $row['user_lastname'];
-        $db_user_email = $row['user_role'];
-        $db_user_role = $row['user_image'];
+        $db_user_role = $row['user_role'];
+        $db_user_image = $row['user_image'];
         //this is just to reverse the the crypt password to the normal password for login
         $password = crypt($password, $db_user_password);
 
@@ -39,12 +39,12 @@ if(isset($_POST['login'])) {
     }
 
     if($username === $db_username && $password === $db_user_password) {
-
+		$_SESSION['user_id'] = $db_user_id;
         $_SESSION['username'] = $db_username;
         $_SESSION['user_firstname'] = $db_user_firstname;
         $_SESSION['user_lastname'] = $db_user_lastname;
         $_SESSION['user_role'] = $db_user_role;
-
+		$_SESSION['user_image'] = $db_user_image;
 		//echo "login sucessful";	
 		header("Location: dashboard/index.php");
 		exist;

@@ -57,9 +57,28 @@
                   <tr>
 
                   <?php
+                    $page_display_limit = 2;
+                    if(isset($_GET['page'])){
+                      $page = $_GET['page'];
+                    } else{
+                      $page = "";
+                    }
+
+                    //this means if page at home display home page else ($page * 5) - 5
+                    if($page == "" || $page == 1){
+                      $page_1 = 0;
+                    } else{
+                      $page_1 = ($page * $page_display_limit) - $page_display_limit;
+                    }
 
 
-                    $queryTwo = "SELECT * FROM members ORDER BY member_id DESC";
+                    $member_select = "SELECT * FROM members";
+                    $member_query = mysqli_query($connection, $member_select);
+                    $member_count = mysqli_num_rows($member_query);
+                    $member_count = ceil($member_count / $page_display_limit);
+                    
+
+                    $queryTwo = "SELECT * FROM members ORDER BY member_id DESC LIMIT $page_1, $page_display_limit";
                     $select_members = mysqli_query($connection, $queryTwo);
 
                     while($row = mysqli_fetch_assoc($select_members)){
@@ -123,17 +142,50 @@
                         // $delete_query .= "UPDATE `gallerycontent` SET `pic_id` = @num := (@num+1);";
                         // $delete_query .= "ALTER TABLE `gallerycontent` AUTO_INCREMENT =1;";
 
+                        
+
                   ?>
+
                     
                 </tbody>
               </table>
+              <ul class="pagination justify-content-center">
+                <?php
+                  //previous page
+                  if ($page > 1) {
+                    echo "<li class='page-item'><a class='page-link' href='members.php?page=".($page-1)."'>Previous</a></li>";
+                    
+                  }
+                  //THIS WILL LOOP AND DISPLAY THE COUNT FOR THE PAGINATION
+                  for($i = 1; $i <= $member_count; $i++){
+                    //current page will be $i == $page
+                    if($i == $page){
+                      echo "<li class='page-item'><a class='page-link active_page_num' href='members.php?page={$i}'>{$i}</a></li>";
+                    } else {
+                      echo "<li class='page-item'><a class='page-link' href='members.php?page={$i}'>{$i}</a></li>";
+                    }
+                  }
+                  
+
+                
+                 if ($i > (int)$page) {
+                  //  echo $i;
+               
+                    $next_page = (int)$page + 1;
+                    //echo $next_page;
+                    echo "<li class='page-item'><a class='page-link' href='members.php?page={$next_page}'>Next</a></li>";                    
+                  }
+
+
+                ?>
+                <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
+              </ul>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- if($_SESSION['username'] == $username){
-                            echo "<td><a href='users.php?delete={$user_id}' class='btn btn-danger'>bbbbb </a></td>";
-                           }else{
-                               echo "ACTIVE";
-                            } -->

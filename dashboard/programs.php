@@ -24,24 +24,29 @@
 
      <?php
                         //Display Alot of Pages with switch statement
-                            if(isset($_GET['source'])){
-                                $source = $_GET['source'];
+                            if(isset($_GET['program'])){
+                                $program = $_GET['program'];
                             } else{
                                 // without else statement the switch statement will give error...just assign to an empty string
-                                $source = '';
+                                $program = '';
                             }
                         
-                            switch($source){
-                                case 'add_member';
-                                include "includes/add_member.php";
+                            switch($program){
+                                case 'add_program';
+                                include "includes/add_program.php";
                                     break;
 
                                 case 'edit_user';
                                 include "includes/edit_user.php";
                                     break;
 
+                                
+                                case 'program_form';
+                                include "includes/program_form.php";
+                                    break;
+
                                 default:
-                                    include "includes/view_all_members.php";
+                                    include "includes/view_all_programs.php";
                                 break;
                             }
                         

@@ -4,7 +4,7 @@ $err_message = "";
 
 if(isset($_POST['add_member'])){
    
-    $member_firstname= $_POST['member_firstname'];
+    $member_firstname = $_POST['member_firstname'];
     $member_middlename = $_POST['member_middlename'];
     $member_lastname = $_POST['member_lastname'];
     $member_dob = $_POST['member_dob'];
@@ -169,5 +169,6 @@ if(isset($_POST['add_member'])){
                         <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary" name="add_member">Add Member</button>
-                            </form>
+                            
                         </div>
+                        </form>

@@ -17,9 +17,9 @@
     <a href="#"><i class="fa fa-list-alt"></i>
       <span>Program <i class="lnr lnr-chevron-right"></i></span></a>
     <ul class="sub-menu-list">
-      <li><a href="carousels.html">Week Program Outline </a> </li>
-      <li><a href="cards.html">Sunday Program Outline</a> </li>
-      <li><a href="cards.html">Add Program Outline</a> </li>
+      <li><a href="../dashboard/programs.php">Program Outline </a> </li>
+      <!-- <li><a href="cards.html">Sunday Program Outline</a> </li> -->
+      <li><a href="../dashboard/programs.php?program=add_program">Add Program Outline</a> </li>
       <li><a href="people.html">Print Outline</a></li>
     </ul>
   </li>
@@ -28,9 +28,9 @@
     <a href="#"><i class="fa fa-money"></i>
       <span>Proceeds <i class="lnr lnr-chevron-right"></i></span></a>
     <ul class="sub-menu-list">
-      <li><a href="carousels.html">Week Proceeds </a> </li>
-      <li><a href="cards.html">Sunday Proceeds</a> </li>
-      <li><a href="people.html">Print Outline</a></li>
+      <li><a href="carousels.html">View All Proceeds </a> </li>
+      <li><a href="cards.html">Add Proceeds</a> </li>
+      <li><a href="people.html">Print Proceeds</a></li>
     </ul>
   </li>
 
@@ -39,9 +39,9 @@
     <a href="#"><i class="fa fa-bullhorn"></i>
       <span>Annoucement <i class="lnr lnr-chevron-right"></i></span></a>
     <ul class="sub-menu-list">
-      <li><a href="carousels.html">Week Program Outline </a> </li>
-      <li><a href="cards.html">Week Program Outline</a> </li>
-      <li><a href="people.html">Print Outline</a></li>
+      <li><a href="carousels.html">View All Annoucement </a> </li>
+      <li><a href="cards.html">Add Annoucement</a> </li>
+      <li><a href="people.html">Print Annoucement</a></li>
     </ul>
   </li>
 
@@ -79,7 +79,7 @@
 
 <!-- toggle button start -->
 <a class="toggle-btn">
-  <i class="fa fa-angle-double-left menu-collapsed__left"><span>Collapse Sidebar</span></i>
+  <i class="fa fa-angle-double-left menu-collapsed__left"><span>Collapse Sidebar</span></i>   
   <i class="fa fa-angle-double-right menu-collapsed__right"></i>
 </a>
 <!-- //toggle button end -->

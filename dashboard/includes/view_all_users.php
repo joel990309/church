@@ -12,6 +12,7 @@
               <table id="example" class="table display" style="width:100%">
                 <thead class="thead-light">
                   <tr>
+                  <th>User Id</th>
                     <th>User Id</th>
                     <th>Image & Name</th>
                     <th>User Name</th>
@@ -28,6 +29,13 @@
 
                     $queryTwo = "SELECT * FROM users";
                     $select_users = mysqli_query($connection, $queryTwo);
+
+
+                    // $user_id_count =  mysqli_num_rows($select_users);
+                    // echo "<tr>";
+                    //         for($i = 1; $i <= $user_id_count; $i++){
+                    //           echo "<td>$i</td>";
+                    //         }
 
                     while($row = mysqli_fetch_assoc($select_users)){
                         

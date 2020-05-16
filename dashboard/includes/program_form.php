@@ -1,9 +1,7 @@
-=========================================================================
-
 <?php
 
 // $err_message = "";
-// echo '<pre>'; print_r($_POST); echo '</pre>';
+ echo '<pre>'; print_r($_POST); echo '</pre>';
 //$num = $_POST['program_days'];
 
 if(isset($_POST['add_program'])){
@@ -19,14 +17,17 @@ if(isset($_POST['add_program'])){
     //$theme = $_POST['theme'];
     //$program_theme = $theme;
     $program_date = $_POST['program_date'];
-    $program_date = date('Y-m-d', (strtotime($program_date)));
+    //$program_date = date('Y-m-d', strtotime($pro_date));
+   // $program_date = date_create_from_format('j-M-Y', $program_date);
+   // print_r($program_date);
     $program_start_time = $_POST['program_start_time'];
-    $program_start_time = date('H:m:s', (strtotime($program_start_time)));
+    //$program_start_time = date("H:m:s", strtotime($program_start_time));
     //strtotime($_POST['program_start_time']);
     $program_end_time = $_POST['program_end_time'];
-    $program_end_time = date('H:m:s', (strtotime($program_end_time)));
+   // $program_end_time = date('H:m:s', strtotime($program_end_time));
 
-    //$numb = $_POST['program_days'];
+    $numb = count($_POST['program_days']);
+    
     //$numb = $numb - 1;
 
     // echo $numb;
@@ -53,25 +54,26 @@ if(isset($_POST['add_program'])){
     //$post_date = date('d-m-y');
     //$post_comment_count = 4;
 
-
+    $program_user_id = $_POST['program_user_id'];
     //security 
       // Validations
       //program_worship, program_sermon, program_sermon_prayer,
      // '$program_worship', '$program_sermon','$program_sermon_prayer',
-               
-    $query = "INSERT INTO programs (program_opening_prayer, program_worship, program_sermon, program_sermon_prayer, ";
-    $query .= "program_offering, program_closing_prayer, program_conductor, program_theme, ";
-    $query .= "program_date, program_start_time, program_end_time) ";
+     $query = "INSERT INTO programs (program_user_id, program_opening_prayer, program_worship, program_sermon, program_sermon_prayer, ";
+     $query .= "program_offering, program_closing_prayer, program_conductor, program_theme, ";
+     $query .= "program_date, program_start_time, program_end_time) VALUES"; 
 
+     for($i = 0; $i < $numb; $i++){           
+
+    $query .= " ('".$program_user_id[$i]."', '".$program_opening_prayer[$i]."', '".$program_worship[$i]."', '".$program_sermon[$i]."', '".$program_sermon_prayer[$i]."', ";
+    $query .= "'".$program_offering[$i]."', '".$program_closing_prayer[$i]."', '".$program_conductor[$i]."', '".$program_theme[$i]."', ";
+    $query .= "'".$program_date[$i]."', '".$program_start_time[$i]."', '".$program_end_time[$i]."') ,";
      
-    $query .= "VALUES ('$program_opening_prayer', '$program_worship', '$program_sermon', '$program_sermon_prayer', ";
-    $query .= "'$program_offering', '$program_closing_prayer', '$program_conductor', '$program_theme', ";
-    $query .= "'$program_date', '$program_start_time', '$program_end_time') ";
-     
 
-      //$query = rtrim($query,",");
-      $create_program = mysqli_query($connection, $query);
-
+      
+     }
+     $query = rtrim($query,",");
+     $create_program = mysqli_query($connection, $query);
       if(!$create_program){
           echo "fail";
           //die("Query Failed ". mysqli_error($connection));
@@ -118,7 +120,7 @@ if(isset($_POST['add_program'])){
         // }
         // $theme = $_POST['theme'];
         // $theme = ucwords($theme);
-        // echo "<h4 class='text-center'><strong>$theme</strong></h4> ";
+         echo "<h4 class='text-center'><strong>$theme</strong></h4> ";
         ?>   
     
       <!-- form card -->
@@ -136,7 +138,7 @@ if(isset($_POST['add_program'])){
                     
                     <h4 class="mb-0">
                         <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree<?php echo $i;?>" aria-expanded="false" aria-controls="collapseThree">
-                        Program Forms For Day #<?php //echo $i;?>
+                        Program Forms For Day #<?php echo $i;?>
                         </button>
                     </h4>
                     </div>
@@ -146,55 +148,55 @@ if(isset($_POST['add_program'])){
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="inputPassword4" class="input__label">Date</label>
-                                <input type="date" class="form-control input-style datetime" id="inputPassword4" placeholder="YY-MM-DD" name="program_date">
+                                <input type="date" class="form-control input-style datetime" id="inputPassword4" placeholder="YY-MM-DD" name="program_date[]">
                             </div> 
 
                             <div class="form-group col-md-2">
                                 <label for="inputPassword4" class="input__label">Start time </label>
-                                <input type="time" class="form-control input-style datetime" id="inputPassword4" placeholder="YY-MM-DD" name="program_start_time">
+                                <input type="time" class="form-control input-style datetime" id="inputPassword4" placeholder="YY-MM-DD" name="program_start_time[]">
                             </div>
 
                             <div class="form-group col-md-2">
                                 <label for="inputPassword4" class="input__label">Closing Time</label>
-                                <input type="time" class="form-control input-style" placeholder="YY-MM-DD" name="program_end_time">
+                                <input type="time" class="form-control input-style" placeholder="YY-MM-DD" name="program_end_time[]">
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4" class="input__label">Conductor</label>
-                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_conductor">
+                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_conductor[]">
                             </div>
 
                         </div>
-                        
-                        <input type="hidden" value="<?php echo $theme;?>" name="program_theme" >
+                        <input type="hidden" value="<?php echo $_SESSION['username'];?>" name="program_user_id[]" >
+                        <input type="hidden" value="<?php echo $theme;?>" name="program_theme[]" >
                         
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4" class="input__label">Opening Prayer</label>
-                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_opening_prayer">
+                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_opening_prayer[]">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4" class="input__label">Closing Prayer</label>
-                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_closing_prayer">
+                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_closing_prayer[]">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4" class="input__label">Worship</label>
-                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_worship">
+                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_worship[]">
                             </div>
                         </div>  
 
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4" class="input__label">Sermon</label>
-                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_sermon">
+                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_sermon[]">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4" class="input__label">Prayer After Sermon</label>
-                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_sermon_prayer">
+                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_sermon_prayer[]">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEmail4" class="input__label">Offering</label>
-                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_offering">
+                                <input type="text" class="form-control input-style" placeholder="Enter Name" name="program_offering[]">
                             </div>
                         </div> 
 
@@ -202,7 +204,7 @@ if(isset($_POST['add_program'])){
                     </div>
                 </div>
 
-                <input type="hidden"  value="<?php echo $num;?>" name="program_days">
+                <input type="hidden" value="<?php echo $i;?>"  name="program_days[]">
 
 
 
@@ -225,6 +227,4 @@ if(isset($_POST['add_program'])){
 
 
 </div> <!-- first card body end -->
-
-
-=============================================================================================================
+    
